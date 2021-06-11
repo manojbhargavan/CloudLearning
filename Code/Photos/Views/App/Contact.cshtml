@@ -1,5 +1,80 @@
+@model ContactViewModel
 @{
     ViewBag.PageTitle = "Contact Us";
 }
 
-<em>Nothing Here</em>
+@section JqueryValidation{
+<script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<form class="box" method="POST">
+    <div asp-validationsummary="Model"></div>
+    <div class="field">
+        <label class="label" asp-for="Name">Name</label>
+        <div class="control">
+            <input class="input" type="text" placeholder="Text input" asp-for="Name">
+            <span asp-validation-for="Name">
+
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" asp-for="Email">Email</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="Email input" value="hello@@" asp-for="Email">
+            <span asp-validation-for="Email"></span>
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" asp-for="Subject">Subject</label>
+        <div class="control">
+            <input class="input" type="text" placeholder="Text input" asp-for="Subject">
+            <span asp-validation-for="Subject"></span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" asp-for="Message">Message</label>
+        <div class="control">
+            <textarea class="textarea" placeholder="Textarea" asp-for="Message"></textarea>
+            <span asp-validation-for="Email"></span>
+        </div>
+    </div>
+
+    <label class="checkbox" asp-for="FailMail">
+        <input type="checkbox" asp-for="FailMail">
+        Emulate Failure
+    </label>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-link">Submit</button>
+        </div>
+    </div>
+    @{
+        if (ViewBag.MailSent != null)
+        {
+            if (ViewBag.MailSent)
+            {
+                <div class="box small-box small-box-success">
+                    <span class="has-text-success is-size-4">Mail Sent!!</span><br />
+                    <em class="has-text-grey-lighter">@ViewBag.MailDetails</em>
+                </div>
+            }
+            else
+            {
+                <div class="box small-box small-box-fail">
+                    <span class="has-text-danger is-size-4">Unable to send mail try later!!</span>
+                </div>
+            }
+        }
+    }
+
+</form>

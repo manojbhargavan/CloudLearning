@@ -23,3 +23,27 @@
 .navbar {
   margin: 5px;
 }
+
+.box {
+  width: 400px;
+  margin: 20px;
+}
+
+.input-validation-error {
+  border: 1px solid red;
+}
+
+.small-box {
+  width: 350px;
+  margin: 0px;
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+.small-box-success {
+  border: 1px solid green;
+}
+
+.small-box-fail {
+  border: 1px solid red;
+}

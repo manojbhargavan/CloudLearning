@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Photos.Services.Data;
+using Photos.Services.Email;
 
 namespace Photos
 {
@@ -53,6 +54,8 @@ namespace Photos
             {
                 services.AddTransient<IPhotoRepository, SqlServerPhotoRepository>();
             }
+
+            services.AddTransient<IEmailService, NullEmailService>();
         }
     }
 }
