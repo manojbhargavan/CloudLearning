@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace Photos
 {
@@ -11,7 +12,7 @@ namespace Photos
                 .ConfigureWebHostDefaults(option =>
                 {
                     option.UseStartup<Startup>();
-                })
+                })                
                 .Build()
                 .Run();
         }
