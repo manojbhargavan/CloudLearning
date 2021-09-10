@@ -1,6 +1,6 @@
 using System;
 
-namespace Lib.Cryptography
+namespace Lib.Cryptography.Util
 {
     public static class ConversionHelper
     {

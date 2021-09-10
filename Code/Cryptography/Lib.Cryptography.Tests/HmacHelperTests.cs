@@ -1,6 +1,7 @@
 using System;
 using Lib.Cryptography;
 using Lib.Cryptography.Hashing;
+using Lib.Cryptography.Key;
 using Lib.Cryptography.Util;
 using LoremNET;
 using Xunit;
@@ -8,11 +9,11 @@ using Xunit.Abstractions;
 
 namespace Tests.Cryptography
 {
-    public class HashingHelperTests
+    public class HmacHelperTests
     {
         private readonly ITestOutputHelper _testOutputHelper;
 
-        public HashingHelperTests(ITestOutputHelper testOutputHelper)
+        public HmacHelperTests(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
         }
@@ -27,33 +28,27 @@ namespace Tests.Cryptography
             string randomString = Lorem.Sentence(wordCount);
 
             // Act
-            var hash1Md5 = randomString.ComputeMd5Hash();
-            var hash2Md5 = randomString.ComputeMd5Hash();
-            var hash1Sha1 = randomString.ComputeSha1Hash();
-            var hash2Sha1 = randomString.ComputeSha1Hash();
-            var hash1Sha2256 = randomString.ComputeSha2_256Hash();
-            var hash2Sha2256 = randomString.ComputeSha2_256Hash();
-            var hash1Sha2384 = randomString.ComputeSha2_384Hash();
-            var hash2Sha2384 = randomString.ComputeSha2_384Hash();
-            var hash1Sha2512 = randomString.ComputeSha2_512Hash();
-            var hash2Sha2512 = randomString.ComputeSha2_512Hash();
-            var hash1Sha3256 = randomString.ComputeSha3_256Hash();
-            var hash2Sha3256 = randomString.ComputeSha3_256Hash();
-            var hash1Sha3384 = randomString.ComputeSha3_384Hash();
-            var hash2Sha3384 = randomString.ComputeSha3_384Hash();
-            var hash1Sha3512 = randomString.ComputeSha3_512Hash();
-            var hash2Sha3512 = randomString.ComputeSha3_512Hash();
+            var key = KeyHelper.GenerateKey(256);
+            var hash1Md5 = randomString.ComputeMd5Hmac(key);
+            var hash2Md5 = randomString.ComputeMd5Hmac(key);
+            var hash1Sha1 = randomString.ComputeSha1Hmac(key);
+            var hash2Sha1 = randomString.ComputeSha1Hmac(key);
+            var hash1Sha2256 = randomString.ComputeSha2_256Hmac(key);
+            var hash2Sha2256 = randomString.ComputeSha2_256Hmac(key);
+            var hash1Sha2384 = randomString.ComputeSha2_384Hmac(key);
+            var hash2Sha2384 = randomString.ComputeSha2_384Hmac(key);
+            var hash1Sha2512 = randomString.ComputeSha2_512Hmac(key);
+            var hash2Sha2512 = randomString.ComputeSha2_512Hmac(key);
 
             _testOutputHelper.WriteLine($"Input String           : {randomString}");
+            _testOutputHelper.WriteLine($"Key                    : {key.ToBase64String()}");
             _testOutputHelper.WriteLine($"MD5                    : {hash1Md5.ToBase64String()}");
             _testOutputHelper.WriteLine($"SHA1                   : {hash1Sha1.ToBase64String()}");
             _testOutputHelper.WriteLine($"SHA2 256               : {hash1Sha2256.ToBase64String()}");
             _testOutputHelper.WriteLine($"SHA2 384               : {hash1Sha2384.ToBase64String()}");
             _testOutputHelper.WriteLine($"SHA2 512               : {hash1Sha2512.ToBase64String()}");
-            _testOutputHelper.WriteLine($"SHA3 256               : {hash1Sha3256.ToBase64String()}");
-            _testOutputHelper.WriteLine($"SHA3 384               : {hash1Sha3384.ToBase64String()}");
-            _testOutputHelper.WriteLine($"SHA3 512 (Base64)      : {hash1Sha3512.ToBase64String()}");
-            _testOutputHelper.WriteLine($"SHA3 512 (Hexadecimal) : {hash1Sha3512.ToHexadecimalString()}");
+            _testOutputHelper.WriteLine($"SHA2 512 (Base64)      : {hash1Sha2512.ToBase64String()}");
+            _testOutputHelper.WriteLine($"SHA2 512 (Hexadecimal) : {hash1Sha2512.ToHexadecimalString()}");
 
             // Assert
             Assert.Equal(hash1Md5, hash2Md5);
@@ -61,9 +56,6 @@ namespace Tests.Cryptography
             Assert.Equal(hash1Sha2256, hash2Sha2256);
             Assert.Equal(hash1Sha2384, hash2Sha2384);
             Assert.Equal(hash1Sha2512, hash2Sha2512);
-            Assert.Equal(hash1Sha3256, hash2Sha3256);
-            Assert.Equal(hash1Sha3384, hash2Sha3384);
-            Assert.Equal(hash1Sha3512, hash2Sha3512);
         }
         
         [Fact]
@@ -74,8 +66,9 @@ namespace Tests.Cryptography
             string randomString2 = Lorem.Sentence(10);
 
             // Act
-            var hash1 = randomString1.ComputeMd5Hash();
-            var hash2 = randomString2.ComputeMd5Hash();
+            var key = KeyHelper.GenerateKey(256);
+            var hash1 = randomString1.ComputeMd5Hmac(key);
+            var hash2 = randomString2.ComputeMd5Hmac(key);
             _testOutputHelper.WriteLine($"{randomString1}: {hash1.ToBase64String()}");
             _testOutputHelper.WriteLine($"{randomString2}: {hash2.ToBase64String()}");
 

@@ -1,5 +1,7 @@
 using System;
 using Lib.Cryptography;
+using Lib.Cryptography.Key;
+using Lib.Cryptography.Util;
 using Xunit;
 using Xunit.Abstractions;
 

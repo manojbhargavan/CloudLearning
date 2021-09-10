@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Lib.Cryptography
+namespace Lib.Cryptography.Key
 {
     public static class Random
     {
