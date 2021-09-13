@@ -1,11 +1,10 @@
 using System;
-using Lib.Cryptography;
 using Lib.Cryptography.Key;
 using Lib.Cryptography.Util;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Cryptography
+namespace Tests.Cryptography.Key
 {
     public class RandomTests
     {

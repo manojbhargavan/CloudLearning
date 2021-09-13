@@ -1,5 +1,3 @@
-using System;
-using Lib.Cryptography;
 using Lib.Cryptography.Hashing;
 using Lib.Cryptography.Key;
 using Lib.Cryptography.Util;
@@ -7,7 +5,7 @@ using LoremNET;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Cryptography
+namespace Tests.Cryptography.Hashing
 {
     public class HmacHelperTests
     {

@@ -1,8 +1,8 @@
 namespace Lib.Cryptography.Key
 {
-    public class KeyHelper
+    public static class KeyHelper
     {
-        public static byte[] GenerateKey(int length)
+        public static byte[] GenerateKey(this int length)
         {
             return length.GetRandomNumber();
         }

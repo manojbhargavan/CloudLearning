@@ -1,4 +1,3 @@
-using Lib.Cryptography;
 using Lib.Cryptography.Hashing;
 using Lib.Cryptography.Key;
 using Lib.Cryptography.Util;
@@ -6,7 +5,7 @@ using LoremNET;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Cryptography
+namespace Tests.Cryptography.Hashing
 {
     public class Pbkdf2HelperTests
     {
@@ -22,15 +21,15 @@ namespace Tests.Cryptography
         [InlineData(10, 100, 100, true)]
         [InlineData(10, 1000, 100, false)]
         [InlineData(10, 10000, 10000, true)]
-        [InlineData(15, 20000, 30000, false)]
-        [InlineData(20, 30000, 30000, true)]
+        [InlineData(15, 20000, 300000, false)]
+        [InlineData(20, 300000, 300000, true)]
         public void HashTest(int wordCount, int iterationCount1, int iterationCount2, bool hashMatch)
         {
             // Arrange
             string randomString = Lorem.Sentence(wordCount);
 
             // Act
-            var key = KeyHelper.GenerateKey(256);
+            var key = KeyHelper.GenerateKey(32);
             var hashUsingPbkdf21 = randomString.HashUsingPbkdf2(key, iterationCount1);
             var hashUsingPbkdf22 = randomString.HashUsingPbkdf2(key, iterationCount2);
 
